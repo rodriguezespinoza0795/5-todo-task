@@ -1,0 +1,8 @@
+{
+  "completedTasks": "Has completado {{completed}} de {{total}} tareas",
+  "changeLanguage": "Cambiar idioma",
+  "newTask": "Nueva tarea...",
+  "searchTask": "Buscar tarea",
+  "createTask": "Crear nueva tarea",
+  "changeMode": "Cambiar modo"
+}

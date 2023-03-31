@@ -1,0 +1,8 @@
+{
+  "completedTasks": "You have completed {{completed}} of {{total}} tasks",
+  "changeLanguage": "Change language",
+  "newTask": "New task...",
+  "searchTask": "Search task",
+  "createTask": "Create new task",
+  "changeMode": "Change mode"
+}
