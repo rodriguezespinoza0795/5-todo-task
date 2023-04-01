@@ -1,32 +1,30 @@
 import { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
+import {
+  AppBar,
+  Box,
+  CssBaseline,
+  Divider,
+  Drawer,
+  List,
+  ListItemIcon,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+  Typography,
+  IconButton,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import TranslateIcon from '@mui/icons-material/Translate';
-import { useTranslation } from 'react-i18next';
-import { useTheme } from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { useThemeMode } from '~/context/useTheme';
-
-interface Props {
-  window?: () => Window;
-  children: React.ReactNode;
-}
+import { useTranslation } from 'react-i18next';
+import { useTheme } from '@mui/material/styles';
+import { useThemeMode } from '~/context';
+import { DrawerAppBarProps } from './DrawerAppBar.types';
 
 const drawerWidth = 240;
 
-export default function DrawerAppBar(props: Props) {
+export default function DrawerAppBar(props: DrawerAppBarProps) {
   const { window, children } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const { t, i18n } = useTranslation('common');
@@ -56,7 +54,7 @@ export default function DrawerAppBar(props: Props) {
           </ListItemIcon>
           <ListItemText primary={t('changeLanguage')} />
         </ListItemButton>
-        <ListItemButton onClick={handleLanguage}>
+        <ListItemButton onClick={toggleColorMode}>
           <ListItemIcon>
             {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
           </ListItemIcon>

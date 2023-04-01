@@ -4,8 +4,7 @@ import App from './App';
 import './index.css';
 import { I18nextProvider } from 'react-i18next';
 import i18n from '../config/i18n';
-import { NotificationProvider } from './context/useNotification';
-import { ThemeModeProvider } from './context/useTheme';
+import { NotificationProvider, ThemeModeProvider } from '~/context';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
