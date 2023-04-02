@@ -19,8 +19,8 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
-import { useThemeMode } from '~/context';
 import { DrawerAppBarProps } from './DrawerAppBar.types';
+import { useThemeMode } from '~/context';
 
 const drawerWidth = 240;
 
@@ -115,7 +115,10 @@ export default function DrawerAppBar(props: DrawerAppBarProps) {
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+            },
           }}
         >
           {drawer}

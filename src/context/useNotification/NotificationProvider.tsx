@@ -1,7 +1,7 @@
 import { AlertColor } from '@mui/material';
 import React, { useState } from 'react';
-import { Notification } from '../../components';
 import { NotificationContext } from './NotificationContext';
+import { Notification } from '~/components';
 
 export const NotificationProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const [msg, setMsg] = useState('');

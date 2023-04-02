@@ -5,7 +5,6 @@ import {
   ListItemIcon,
   ListItemText,
   Checkbox,
-  Paper,
   IconButton,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';

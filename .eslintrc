@@ -29,7 +29,18 @@
           "caughtErrorsIgnorePattern": "^_"
         }
       ],
-  
+      "import/order": [ 1, 
+        { "groups": 
+            [
+              "external", 
+              "builtin", 
+              "internal", 
+              "sibling", 
+              "parent", 
+              "index"
+            ]
+        } 
+      ],
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
   

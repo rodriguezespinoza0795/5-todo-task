@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Task } from './TodoTask.types';
 import { isEmpty, last, includes, lowerCase } from 'lodash';
+import { Task } from './TodoTask.types';
 
 export const useTodoTask = () => {
   const [taskList, setTaskList] = useState<Task[]>([]);

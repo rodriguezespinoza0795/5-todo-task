@@ -1,6 +1,6 @@
 import React from 'react';
-import { ThemeContext } from './ThemeContext';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeContext } from './ThemeContext';
 
 export const ThemeModeProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const [mode, setMode] = React.useState<'light' | 'dark'>('light');

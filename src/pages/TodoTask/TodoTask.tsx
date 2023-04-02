@@ -1,8 +1,8 @@
 import { Container, Grid, Paper, Typography, TextField, Button, Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useTodoTask } from './useTodoTask';
 import { DrawerAppBar, ListItems, BasicModal } from '~/components';
 import { useModal } from '~/hooks';
-import { useTodoTask } from './useTodoTask';
 
 function TodoTask() {
   const { t } = useTranslation('common');
@@ -41,7 +41,13 @@ function TodoTask() {
                 />
               </Box>
               <Box>
-                <Paper sx={{ padding: '1.2em', borderRadius: '0.5em', height: '30vh' }}>
+                <Paper
+                  sx={{
+                    padding: '1.2em',
+                    borderRadius: '0.5em',
+                    height: '30vh',
+                  }}
+                >
                   {filteredTask.length ? (
                     <ListItems
                       tasks={filteredTask}
@@ -49,7 +55,13 @@ function TodoTask() {
                       completeItem={completeTask}
                     />
                   ) : (
-                    <Box sx={{ display: 'grid', height: '100%', placeContent: 'center' }}>
+                    <Box
+                      sx={{
+                        display: 'grid',
+                        height: '100%',
+                        placeContent: 'center',
+                      }}
+                    >
                       <Typography variant='h6' textAlign={'center'}>
                         {' '}
                         {taskList.length
@@ -69,7 +81,6 @@ function TodoTask() {
       </Grid>
       <BasicModal
         open={open}
-        handleOpen={handleOpen}
         handleClose={handleClose}
         title={'Crea una nueva tarea'}
         action={createTask}

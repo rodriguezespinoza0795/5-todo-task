@@ -1,20 +1,14 @@
 import { Button, Typography, Modal, Box, TextField } from '@mui/material';
-import { useNotification } from '~/context';
-import { BasicModalProps } from './Modal.types';
 import { useForm } from 'react-hook-form';
 import { has } from 'lodash';
+import { BasicModalProps } from './Modal.types';
+import { useNotification } from '~/context';
 
 interface TaskFormValues {
   task: string;
 }
 
-export default function BasicModal({
-  open,
-  handleOpen,
-  handleClose,
-  title,
-  action,
-}: BasicModalProps) {
+export default function BasicModal({ open, handleClose, title, action }: BasicModalProps) {
   const { getSuccess } = useNotification();
   const {
     register,
