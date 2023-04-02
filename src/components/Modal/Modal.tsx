@@ -1,6 +1,7 @@
 import { Button, Typography, Modal, Box, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { has } from 'lodash';
+import { useTranslation } from 'react-i18next';
 import { BasicModalProps } from './Modal.types';
 import { useNotification } from '~/context';
 
@@ -8,7 +9,8 @@ interface TaskFormValues {
   task: string;
 }
 
-export default function BasicModal({ open, handleClose, title, action }: BasicModalProps) {
+export default function BasicModal({ open, handleClose, title, handleComplete }: BasicModalProps) {
+  const { t } = useTranslation('common');
   const { getSuccess } = useNotification();
   const {
     register,
@@ -18,7 +20,7 @@ export default function BasicModal({ open, handleClose, title, action }: BasicMo
   } = useForm<TaskFormValues>();
 
   const createNewTask = handleSubmit(({ task }) => {
-    action(task);
+    handleComplete(task);
     getSuccess('Se Creó una nueva tarea');
     handleClose();
     resetField('task');
@@ -58,21 +60,32 @@ export default function BasicModal({ open, handleClose, title, action }: BasicMo
             margin='normal'
             type='text'
             fullWidth
-            label={'new task'}
+            label={t('task')}
             sx={{ mt: 2, mb: 1.5 }}
             {...register('task', {
-              required: { value: true, message: 'Task is required' },
+              required: { value: true, message: t('requiredTask') },
               minLength: {
                 value: 5,
-                message: 'Task cannot be less than 5 character',
+                message: t('taskMinLength'),
               },
             })}
             error={has(errors, 'task')}
             helperText={errors?.task?.message}
           />
-          <Button fullWidth variant='contained' sx={{ mt: 1.5 }} type='submit'>
-            Button Text
-          </Button>
+          <Box sx={{ display: 'flex', width: '100%', gap: '20px' }}>
+            <Button
+              fullWidth
+              variant='outlined'
+              sx={{ mt: 1.5 }}
+              onClick={handleClose}
+              color='error'
+            >
+              {t('cancel')}
+            </Button>
+            <Button fullWidth variant='contained' sx={{ mt: 1.5 }} type='submit'>
+              {t('create')}
+            </Button>
+          </Box>
         </Box>
       </Modal>
     </div>

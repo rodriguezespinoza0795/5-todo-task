@@ -63,10 +63,7 @@ function TodoTask() {
                       }}
                     >
                       <Typography variant='h6' textAlign={'center'}>
-                        {' '}
-                        {taskList.length
-                          ? 'No se encontraron coincidencias'
-                          : 'Aún no tienes tareas por hacer'}
+                        {taskList.length ? t('noMatchesFound') : t('noPendingTasks')}
                       </Typography>
                     </Box>
                   )}
@@ -82,8 +79,8 @@ function TodoTask() {
       <BasicModal
         open={open}
         handleClose={handleClose}
-        title={'Crea una nueva tarea'}
-        action={createTask}
+        title={t('newTask')}
+        handleComplete={createTask}
       />
     </Container>
   );

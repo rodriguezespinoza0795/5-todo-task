@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   AppBar,
   Box,
@@ -12,6 +11,7 @@ import {
   Toolbar,
   Typography,
   IconButton,
+  Tooltip,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import TranslateIcon from '@mui/icons-material/Translate';
@@ -20,26 +20,17 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
 import { DrawerAppBarProps } from './DrawerAppBar.types';
+import { useDrawerAppbar } from './useDrawerAppBar';
 import { useThemeMode } from '~/context';
 
 const drawerWidth = 240;
 
 export default function DrawerAppBar(props: DrawerAppBarProps) {
   const { window, children } = props;
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const { t, i18n } = useTranslation('common');
+  const { t } = useTranslation('common');
   const theme = useTheme();
   const { toggleColorMode } = useThemeMode();
-
-  const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
-  };
-
-  const handleLanguage = () => {
-    const currentLanguage = i18n.language;
-    const newLanguage = currentLanguage === 'en' ? 'es' : 'en';
-    i18n.changeLanguage(newLanguage);
-  };
+  const { handleDrawerToggle, handleLanguage, mobileOpen } = useDrawerAppbar();
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -52,13 +43,13 @@ export default function DrawerAppBar(props: DrawerAppBarProps) {
           <ListItemIcon>
             <TranslateIcon />
           </ListItemIcon>
-          <ListItemText primary={t('changeLanguage')} />
+          <ListItemText primary={t('language')} />
         </ListItemButton>
         <ListItemButton onClick={toggleColorMode}>
           <ListItemIcon>
-            {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+            {theme.palette.mode === 'light' ? <Brightness7Icon /> : <Brightness4Icon />}
           </ListItemIcon>
-          <ListItemText primary={t('changeMode')} />
+          <ListItemText primary={theme.palette.mode === 'dark' ? t('lightMode') : t('darkMode')} />
         </ListItemButton>
       </List>
     </Box>
@@ -88,19 +79,23 @@ export default function DrawerAppBar(props: DrawerAppBarProps) {
             DRE
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color='inherit'>
-              {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-            </IconButton>
-            <IconButton
-              size='large'
-              aria-label='account of current user'
-              aria-controls='menu-appbar'
-              aria-haspopup='true'
-              onClick={handleLanguage}
-              color='inherit'
-            >
-              <TranslateIcon />
-            </IconButton>
+            <Tooltip title={theme.palette.mode === 'dark' ? t('lightMode') : t('darkMode')}>
+              <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color='inherit'>
+                {theme.palette.mode === 'light' ? <Brightness7Icon /> : <Brightness4Icon />}
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={t('language')}>
+              <IconButton
+                size='large'
+                aria-label='language system'
+                aria-controls='menu-appbar'
+                aria-haspopup='true'
+                onClick={handleLanguage}
+                color='inherit'
+              >
+                <TranslateIcon />
+              </IconButton>
+            </Tooltip>
           </Box>
         </Toolbar>
       </AppBar>

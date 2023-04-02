@@ -1,8 +1,16 @@
 {
   "completedTasks": "Has completado {{completed}} de {{total}} tareas",
-  "changeLanguage": "Cambiar idioma",
-  "newTask": "Nueva tarea...",
+  "language": "English",
+  "newTask": "Nueva tarea",
   "searchTask": "Buscar tarea",
   "createTask": "Crear nueva tarea",
-  "changeMode": "Cambiar modo"
+  "requiredTask": "La tarea es requerida",
+  "taskMinLength":"La tarea tiene que tener mínimo 5 caracteres",
+  "task": "Tarea",
+  "create": "Crear",
+  "cancel": "Cancelar",
+  "darkMode": "Modo oscuro",
+  "lightMode": "Modo claro",
+  "noMatchesFound": "No se encontraron coincidencias",
+  "noPendingTasks": "Sin tareas pendientes"
 }

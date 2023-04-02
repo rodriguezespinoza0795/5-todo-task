@@ -1,4 +1,4 @@
-import { TodoTask } from './pages';
+import { TodoTask } from '~/pages';
 
 function App() {
   return <TodoTask />;

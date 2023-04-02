@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
+import i18n from 'config/i18n';
 import App from './App';
 import './index.css';
-import i18n from '../config/i18n';
 import { NotificationProvider, ThemeModeProvider } from '~/context';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

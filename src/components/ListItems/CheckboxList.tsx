@@ -8,18 +8,7 @@ import {
   IconButton,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-interface CheckboxListProps {
-  tasks: Task[];
-  deleteItem: (id: number) => void;
-  completeItem: (id: number) => void;
-}
-
-export interface Task {
-  id: number;
-  name: string;
-  completed: boolean;
-}
+import { CheckboxListProps } from './CheckboxList.types';
 
 export default function CheckboxList({ tasks, deleteItem, completeItem }: CheckboxListProps) {
   return (

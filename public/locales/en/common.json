@@ -1,8 +1,16 @@
 {
   "completedTasks": "You have completed {{completed}} of {{total}} tasks",
-  "changeLanguage": "Change language",
-  "newTask": "New task...",
+  "language": "Español",
+  "newTask": "New task",
   "searchTask": "Search task",
   "createTask": "Create new task",
-  "changeMode": "Change mode"
+  "requiredTask": "Task is required",
+  "taskMinLength":"Task cannot be less than 5 character",
+  "task": "Task",
+  "create": "Create",
+  "calcel": "Cancel",
+  "darkMode": "Dark mode",
+  "lightMode": "Light mode",
+  "noMatchesFound": "No matches found",
+  "noPendingTasks": "No pending tasks"
 }
