@@ -24,43 +24,40 @@ export interface Task {
 
 export default function CheckboxList({ tasks, deleteItem, completeItem }: CheckboxListProps) {
   return (
-    <Paper sx={{ padding: '1.2em', borderRadius: '0.5em' }}>
-      <List
-        sx={{
-          width: '100%',
-          height: '30vh',
-          overflow: 'scroll',
-        }}
-      >
-        {tasks.map(({ name, id, completed }) => {
-          const labelId = `checkbox-list-label-${id}`;
+    <List
+      sx={{
+        width: '100%',
+        overflow: 'scroll',
+      }}
+    >
+      {tasks.map(({ name, id, completed }) => {
+        const labelId = `checkbox-list-label-${id}`;
 
-          return (
-            <ListItem
-              key={id}
-              secondaryAction={
-                <IconButton edge='end' aria-label='comments' onClick={() => deleteItem(id)}>
-                  <DeleteIcon />
-                </IconButton>
-              }
-              disablePadding
-            >
-              <ListItemButton role={undefined} onClick={() => completeItem(id)} dense>
-                <ListItemIcon>
-                  <Checkbox
-                    edge='start'
-                    checked={completed}
-                    tabIndex={-1}
-                    disableRipple
-                    inputProps={{ 'aria-labelledby': labelId }}
-                  />
-                </ListItemIcon>
-                <ListItemText id={labelId} primary={name} />
-              </ListItemButton>
-            </ListItem>
-          );
-        })}
-      </List>
-    </Paper>
+        return (
+          <ListItem
+            key={id}
+            secondaryAction={
+              <IconButton edge='end' aria-label='comments' onClick={() => deleteItem(id)}>
+                <DeleteIcon />
+              </IconButton>
+            }
+            disablePadding
+          >
+            <ListItemButton role={undefined} onClick={() => completeItem(id)} dense>
+              <ListItemIcon>
+                <Checkbox
+                  edge='start'
+                  checked={completed}
+                  tabIndex={-1}
+                  disableRipple
+                  inputProps={{ 'aria-labelledby': labelId }}
+                />
+              </ListItemIcon>
+              <ListItemText id={labelId} primary={name} />
+            </ListItemButton>
+          </ListItem>
+        );
+      })}
+    </List>
   );
 }
