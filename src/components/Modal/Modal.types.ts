@@ -3,4 +3,5 @@ export interface BasicModalProps {
   handleOpen: () => void;
   handleClose: () => void;
   title: string;
+  action: (newTask: string) => void;
 }

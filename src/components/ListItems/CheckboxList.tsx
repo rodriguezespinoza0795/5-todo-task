@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   List,
   ListItem,
@@ -11,22 +10,19 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function CheckboxList() {
-  const [checked, setChecked] = React.useState([0]);
+interface CheckboxListProps {
+  tasks: Task[];
+  deleteItem: (id: number) => void;
+  completeItem: (id: number) => void;
+}
 
-  const handleToggle = (value: number) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+export interface Task {
+  id: number;
+  name: string;
+  completed: boolean;
+}
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
-  };
-
+export default function CheckboxList({ tasks, deleteItem, completeItem }: CheckboxListProps) {
   return (
     <Paper sx={{ padding: '1.2em', borderRadius: '0.5em' }}>
       <List
@@ -36,30 +32,30 @@ export default function CheckboxList() {
           overflow: 'scroll',
         }}
       >
-        {[...Array(14).keys()].map((value) => {
-          const labelId = `checkbox-list-label-${value}`;
+        {tasks.map(({ name, id, completed }) => {
+          const labelId = `checkbox-list-label-${id}`;
 
           return (
             <ListItem
-              key={value}
+              key={id}
               secondaryAction={
-                <IconButton edge='end' aria-label='comments'>
+                <IconButton edge='end' aria-label='comments' onClick={() => deleteItem(id)}>
                   <DeleteIcon />
                 </IconButton>
               }
               disablePadding
             >
-              <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
+              <ListItemButton role={undefined} onClick={() => completeItem(id)} dense>
                 <ListItemIcon>
                   <Checkbox
                     edge='start'
-                    checked={checked.indexOf(value) !== -1}
+                    checked={completed}
                     tabIndex={-1}
                     disableRipple
                     inputProps={{ 'aria-labelledby': labelId }}
                   />
                 </ListItemIcon>
-                <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+                <ListItemText id={labelId} primary={name} />
               </ListItemButton>
             </ListItem>
           );

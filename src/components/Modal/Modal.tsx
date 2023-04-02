@@ -8,7 +8,13 @@ interface TaskFormValues {
   task: string;
 }
 
-export default function BasicModal({ open, handleOpen, handleClose, title }: BasicModalProps) {
+export default function BasicModal({
+  open,
+  handleOpen,
+  handleClose,
+  title,
+  action,
+}: BasicModalProps) {
   const { getSuccess } = useNotification();
   const {
     register,
@@ -18,7 +24,7 @@ export default function BasicModal({ open, handleOpen, handleClose, title }: Bas
   } = useForm<TaskFormValues>();
 
   const createNewTask = handleSubmit(({ task }) => {
-    console.log('Task', task);
+    action(task);
     getSuccess('Se Creó una nueva tarea');
     handleClose();
     resetField('task');
@@ -26,7 +32,6 @@ export default function BasicModal({ open, handleOpen, handleClose, title }: Bas
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -40,7 +45,9 @@ export default function BasicModal({ open, handleOpen, handleClose, title }: Bas
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 400,
+            maxWidth: 400,
+            width: '100%',
+            minWidth: 320,
             bgcolor: 'background.paper',
             boxShadow: 24,
             p: 4,
