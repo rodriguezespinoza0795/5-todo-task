@@ -1,14 +1,19 @@
+import React, { useState } from 'react';
 import { Container, Grid, Paper, Typography, TextField, Button, Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useTodoTask } from './useTodoTask';
-import { DrawerAppBar, ListItems, BasicModal } from '~/components';
+import { DrawerAppBar, ListItems, BasicModal, BasicTabs } from '~/components';
 import { useModal } from '~/hooks';
 
 function TodoTask() {
   const { t } = useTranslation('common');
   const { open, handleOpen, handleClose } = useModal();
+  const [value, setValue] = useState(0);
   const { taskList, filteredTask, deteteTask, completeTask, searchTask, createTask, search } =
-    useTodoTask();
+    useTodoTask(value);
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
 
   return (
     <Container maxWidth='sm'>
@@ -41,11 +46,13 @@ function TodoTask() {
                 />
               </Box>
               <Box>
+                <BasicTabs value={value} handleChange={handleChange} />
                 <Paper
                   sx={{
                     padding: '1.2em',
-                    borderRadius: '0.5em',
+                    borderRadius: '0 0 0.5em 0.5em',
                     height: '30vh',
+                    overflow: 'scroll',
                   }}
                 >
                   {filteredTask.length ? (

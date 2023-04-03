@@ -3,7 +3,7 @@ import { isEmpty, last, includes, lowerCase } from 'lodash';
 import { Task } from './TodoTask.types';
 import { getItem, setItem } from '~/utils';
 
-export const useTodoTask = () => {
+export const useTodoTask = (value: number) => {
   const initialTasks = getItem('taskList');
   const [taskList, setTaskList] = useState<Task[]>(initialTasks);
   const [filteredTask, setFilteredTask] = useState<Task[]>([]);
@@ -24,8 +24,20 @@ export const useTodoTask = () => {
   };
 
   useEffect(() => {
-    setFilteredTask(taskList.filter((task) => includes(lowerCase(task.name), lowerCase(search))));
-  }, [search, taskList]);
+    console.log('value', value);
+    let taskType = taskList;
+    if ([1, 2].includes(value)) {
+      taskType =
+        value === 2
+          ? taskList.filter(
+              (task) => includes(lowerCase(task.name), lowerCase(search)) && task.completed,
+            )
+          : taskList.filter(
+              (task) => includes(lowerCase(task.name), lowerCase(search)) && !task.completed,
+            );
+    }
+    setFilteredTask(taskType.filter((task) => includes(lowerCase(task.name), lowerCase(search))));
+  }, [search, taskList, value]);
 
   useEffect(() => {
     setItem('taskList', taskList);

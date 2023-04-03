@@ -15,7 +15,6 @@ export default function CheckboxList({ tasks, deleteItem, completeItem }: Checkb
     <List
       sx={{
         width: '100%',
-        overflow: 'scroll',
       }}
     >
       {tasks.map(({ name, id, completed }) => {
