@@ -12,5 +12,8 @@
   "darkMode": "Dark mode",
   "lightMode": "Light mode",
   "noMatchesFound": "No matches found",
-  "noPendingTasks": "No pending tasks"
+  "noPendingTasks": "No pending tasks",
+  "all": "All",
+  "pending": "Pending",
+  "completed": "Completed"
 }
