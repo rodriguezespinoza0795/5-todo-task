@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
 import { isEmpty, last, includes, lowerCase } from 'lodash';
 import { Task } from './TodoTask.types';
+import { getItem, setItem } from '~/utils';
 
 export const useTodoTask = () => {
-  const [taskList, setTaskList] = useState<Task[]>([]);
+  const initialTasks = getItem('taskList');
+  const [taskList, setTaskList] = useState<Task[]>(initialTasks);
   const [filteredTask, setFilteredTask] = useState<Task[]>([]);
   const [search, setSearch] = useState('');
 
   const createTask = (newTask: string) => {
     const newID = isEmpty(taskList) ? 1 : (last(taskList)?.id as number) + 1;
-    setTaskList([...taskList, { id: newID, name: newTask, completed: false }]);
+    const newTaskList = [...taskList, { id: newID, name: newTask, completed: false }];
+    setTaskList(newTaskList);
   };
 
   const deteteTask = (id: number) => {
@@ -23,6 +26,10 @@ export const useTodoTask = () => {
   useEffect(() => {
     setFilteredTask(taskList.filter((task) => includes(lowerCase(task.name), lowerCase(search))));
   }, [search, taskList]);
+
+  useEffect(() => {
+    setItem('taskList', taskList);
+  }, [taskList]);
 
   const completeTask = (id: number) => {
     setTaskList(
@@ -43,5 +50,6 @@ export const useTodoTask = () => {
     searchTask,
     createTask,
     search,
+    initialTasks,
   };
 };
