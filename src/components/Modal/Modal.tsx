@@ -1,30 +1,20 @@
-import { Button, Typography, Modal, Box, TextField } from '@mui/material';
-import { useForm } from 'react-hook-form';
-import { has } from 'lodash';
+import { Button, Typography, Modal, Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { BasicModalProps } from './Modal.types';
-import { useNotification } from '~/context';
 
-interface TaskFormValues {
-  task: string;
+export interface ConfirmationModalProps {
+  open: boolean;
+  handleClose: () => void;
+  title: string;
+  handleComplete: () => void;
 }
 
-export default function BasicModal({ open, handleClose, title, handleComplete }: BasicModalProps) {
+export default function ConfirmationModal({
+  open,
+  handleClose,
+  title,
+  handleComplete,
+}: ConfirmationModalProps) {
   const { t } = useTranslation('common');
-  const { getSuccess } = useNotification();
-  const {
-    register,
-    resetField,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<TaskFormValues>();
-
-  const createNewTask = handleSubmit(({ task }) => {
-    handleComplete(task);
-    getSuccess('Se Creó una nueva tarea');
-    handleClose();
-    resetField('task');
-  });
 
   return (
     <div>
@@ -35,7 +25,6 @@ export default function BasicModal({ open, handleClose, title, handleComplete }:
         aria-describedby='modal-modal-description'
       >
         <Box
-          component='form'
           sx={{
             position: 'absolute' as const,
             top: '50%',
@@ -51,27 +40,10 @@ export default function BasicModal({ open, handleClose, title, handleComplete }:
             flexDirection: 'column',
             alignItems: 'center',
           }}
-          onSubmit={createNewTask}
         >
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography id='modal-modal-title' variant='h6' component='h6' textAlign={'center'}>
             {title}
           </Typography>
-          <TextField
-            margin='normal'
-            type='text'
-            fullWidth
-            label={t('task')}
-            sx={{ mt: 2, mb: 1.5 }}
-            {...register('task', {
-              required: { value: true, message: t('requiredTask') },
-              minLength: {
-                value: 5,
-                message: t('taskMinLength'),
-              },
-            })}
-            error={has(errors, 'task')}
-            helperText={errors?.task?.message}
-          />
           <Box sx={{ display: 'flex', width: '100%', gap: '20px' }}>
             <Button
               fullWidth
@@ -82,8 +54,8 @@ export default function BasicModal({ open, handleClose, title, handleComplete }:
             >
               {t('cancel')}
             </Button>
-            <Button fullWidth variant='contained' sx={{ mt: 1.5 }} type='submit'>
-              {t('create')}
+            <Button fullWidth variant='contained' sx={{ mt: 1.5 }} onClick={handleComplete}>
+              {t('confirm')}
             </Button>
           </Box>
         </Box>

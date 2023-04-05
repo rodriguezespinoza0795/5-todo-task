@@ -1,7 +1,8 @@
 import { Container, Grid, Paper, Typography, TextField, Button, Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useTodoTask } from './useTodoTask';
-import { DrawerAppBar, ListItems, BasicModal, BasicTabs } from '~/components';
+import { TaskForm } from './TaskForm';
+import { DrawerAppBar, ListItems, BasicTabs } from '~/components';
 import { useModal, useTabs } from '~/hooks';
 
 function TodoTask() {
@@ -79,7 +80,7 @@ function TodoTask() {
           </Grid>
         </DrawerAppBar>
       </Grid>
-      <BasicModal
+      <TaskForm
         open={open}
         handleClose={handleClose}
         title={t('newTask')}

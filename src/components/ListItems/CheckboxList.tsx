@@ -6,45 +6,62 @@ import {
   ListItemText,
   Checkbox,
   IconButton,
+  Tooltip,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useTranslation } from 'react-i18next';
+import { useModal } from 'src/hooks';
 import { CheckboxListProps } from './CheckboxList.types';
+import { Modal } from '~/components';
 
 export default function CheckboxList({ tasks, deleteItem, completeItem }: CheckboxListProps) {
-  return (
-    <List
-      sx={{
-        width: '100%',
-      }}
-    >
-      {tasks.map(({ name, id, completed }) => {
-        const labelId = `checkbox-list-label-${id}`;
+  const { t } = useTranslation('common');
+  const { open, handleClose, handleconfirm, handlecomplete } = useModal(deleteItem);
 
-        return (
-          <ListItem
-            key={id}
-            secondaryAction={
-              <IconButton edge='end' aria-label='comments' onClick={() => deleteItem(id)}>
-                <DeleteIcon />
-              </IconButton>
-            }
-            disablePadding
-          >
-            <ListItemButton role={undefined} onClick={() => completeItem(id)} dense>
-              <ListItemIcon>
-                <Checkbox
-                  edge='start'
-                  checked={completed}
-                  tabIndex={-1}
-                  disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
-                />
-              </ListItemIcon>
-              <ListItemText id={labelId} primary={name} />
-            </ListItemButton>
-          </ListItem>
-        );
-      })}
-    </List>
+  return (
+    <>
+      <List
+        sx={{
+          width: '100%',
+        }}
+      >
+        {tasks.map(({ name, id, completed }) => {
+          const labelId = `checkbox-list-label-${id}`;
+
+          return (
+            <ListItem
+              key={id}
+              secondaryAction={
+                <Tooltip title={t('delete')}>
+                  <IconButton edge='end' aria-label='comments' onClick={() => handleconfirm(id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
+              }
+              disablePadding
+            >
+              <ListItemButton role={undefined} onClick={() => completeItem(id)} dense>
+                <ListItemIcon>
+                  <Checkbox
+                    edge='start'
+                    checked={completed}
+                    tabIndex={-1}
+                    disableRipple
+                    inputProps={{ 'aria-labelledby': labelId }}
+                  />
+                </ListItemIcon>
+                <ListItemText id={labelId} primary={name} />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+      </List>
+      <Modal
+        open={open}
+        handleClose={handleClose}
+        title={t('confirmDeleteTask')}
+        handleComplete={handlecomplete}
+      />
+    </>
   );
 }
