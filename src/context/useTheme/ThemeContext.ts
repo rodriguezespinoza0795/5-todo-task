@@ -1,7 +1,7 @@
-import React from 'react';
+import { createContext } from 'react';
 
-type ThemeProps = {
+interface ThemeProps {
   toggleColorMode: () => void;
-};
+}
 
-export const ThemeContext = React.createContext<ThemeProps | null>(null);
+export const ThemeContext = createContext<ThemeProps | null>(null);

@@ -16,7 +16,7 @@ export default function TaskFormModal({
   handleComplete,
 }: BasicModalProps) {
   const { t } = useTranslation('common');
-  const { getSuccess } = useNotification();
+  const notification = useNotification();
   const {
     register,
     resetField,
@@ -26,7 +26,7 @@ export default function TaskFormModal({
 
   const createNewTask = handleSubmit(({ task }) => {
     handleComplete(task);
-    getSuccess(t('taskCreated'));
+    notification?.getSuccess(t('taskCreated'));
     handleClose();
     resetField('task');
   });

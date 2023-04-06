@@ -11,9 +11,10 @@ function TodoTask() {
   const { tabOption, handleChange } = useTabs();
   const { taskList, filteredTask, deteteTask, completeTask, searchTask, createTask, search } =
     useTodoTask(tabOption);
+  const totalTasks = taskList?.length;
 
   return (
-    <Container maxWidth='sm'>
+    <Container maxWidth='sm' sx={{ p: 0 }}>
       <Grid
         container
         direction='column'
@@ -26,8 +27,8 @@ function TodoTask() {
             <Paper sx={{ padding: '1.2em', borderRadius: '0.5em' }}>
               <Typography sx={{ mt: 1, mb: 1, textAlign: 'center' }} variant='h4'>
                 {t('completedTasks', {
-                  completed: taskList.filter((task) => task.completed).length,
-                  total: taskList.length,
+                  completed: taskList?.filter((task) => task.completed).length,
+                  total: totalTasks,
                 })}
               </Typography>
               <Box>
@@ -52,7 +53,7 @@ function TodoTask() {
                     overflow: 'scroll',
                   }}
                 >
-                  {filteredTask.length ? (
+                  {filteredTask?.length ? (
                     <ListItems
                       tasks={filteredTask}
                       deleteItem={deteteTask}
@@ -67,7 +68,7 @@ function TodoTask() {
                       }}
                     >
                       <Typography variant='h6' textAlign={'center'}>
-                        {taskList.length ? t('noMatchesFound') : t('noPendingTasks')}
+                        {totalTasks ? t('noMatchesFound') : t('noPendingTasks')}
                       </Typography>
                     </Box>
                   )}

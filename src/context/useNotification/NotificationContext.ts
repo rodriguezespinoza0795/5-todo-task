@@ -1,8 +1,8 @@
-import React from 'react';
+import { createContext } from 'react';
 
 type ContextProps = {
   getError: (msg: string) => void;
   getSuccess: (msg: string) => void;
 };
 
-export const NotificationContext = React.createContext<ContextProps | null>(null);
+export const NotificationContext = createContext<ContextProps | null>(null);

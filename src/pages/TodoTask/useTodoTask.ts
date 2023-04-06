@@ -4,7 +4,7 @@ import { Task } from './TodoTask.types';
 import { getItem, setItem } from '~/utils';
 
 export const useTodoTask = (tabOption: number) => {
-  const initialTasks = getItem('taskList');
+  const initialTasks = getItem('taskList') || [];
   const [taskList, setTaskList] = useState<Task[]>(initialTasks);
   const [filteredTask, setFilteredTask] = useState<Task[]>([]);
   const [search, setSearch] = useState('');

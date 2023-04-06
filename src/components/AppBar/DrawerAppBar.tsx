@@ -29,7 +29,7 @@ export default function DrawerAppBar(props: DrawerAppBarProps) {
   const { window, children } = props;
   const { t } = useTranslation('common');
   const theme = useTheme();
-  const { toggleColorMode } = useThemeMode();
+  const colorMode = useThemeMode();
   const { handleDrawerToggle, handleLanguage, mobileOpen } = useDrawerAppbar();
 
   const drawer = (
@@ -45,7 +45,7 @@ export default function DrawerAppBar(props: DrawerAppBarProps) {
           </ListItemIcon>
           <ListItemText primary={t('language')} />
         </ListItemButton>
-        <ListItemButton onClick={toggleColorMode}>
+        <ListItemButton onClick={colorMode?.toggleColorMode}>
           <ListItemIcon>
             {theme.palette.mode === 'light' ? <Brightness7Icon /> : <Brightness4Icon />}
           </ListItemIcon>
@@ -80,7 +80,7 @@ export default function DrawerAppBar(props: DrawerAppBarProps) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             <Tooltip title={theme.palette.mode === 'dark' ? t('lightMode') : t('darkMode')}>
-              <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color='inherit'>
+              <IconButton sx={{ ml: 1 }} onClick={colorMode?.toggleColorMode} color='inherit'>
                 {theme.palette.mode === 'light' ? <Brightness7Icon /> : <Brightness4Icon />}
               </IconButton>
             </Tooltip>

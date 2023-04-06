@@ -10,8 +10,8 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
-import { useModal } from 'src/hooks';
 import { CheckboxListProps } from './CheckboxList.types';
+import { useModal } from '~/hooks';
 import { Modal } from '~/components';
 
 export default function CheckboxList({ tasks, deleteItem, completeItem }: CheckboxListProps) {

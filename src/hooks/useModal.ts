@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const useModal = (deleteFn: (id: number) => void) => {
+export const useModal = (deleteFn?: (id: number) => void) => {
   const [id, setId] = useState(0);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -12,7 +12,9 @@ export const useModal = (deleteFn: (id: number) => void) => {
   };
 
   const handlecomplete = () => {
-    deleteFn(id);
+    if (deleteFn) {
+      deleteFn(id);
+    }
     handleClose();
   };
 

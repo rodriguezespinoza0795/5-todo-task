@@ -23,6 +23,6 @@
       "~/*": ["src/*"],
     }
   },
-  "include": ["vite.config.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["vite.config.ts", "**/*.ts", "**/*.tsx", "./tests/**/*",],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
