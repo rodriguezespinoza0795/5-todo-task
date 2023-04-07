@@ -15,6 +15,17 @@ export const useTodoTask = (tabOption: number) => {
     setTaskList(newTaskList);
   };
 
+  const updateTask = (id: number, newTask: string) => {
+    setTaskList(
+      taskList.map((task) => {
+        if (task.id === id) {
+          return { ...task, name: newTask };
+        }
+        return task;
+      }),
+    );
+  };
+
   const deteteTask = (id: number) => {
     setTaskList(taskList.filter((task) => task.id !== id));
   };
@@ -58,5 +69,6 @@ export const useTodoTask = (tabOption: number) => {
     createTask,
     search,
     initialTasks,
+    updateTask,
   };
 };

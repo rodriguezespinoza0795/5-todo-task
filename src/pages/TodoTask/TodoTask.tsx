@@ -1,7 +1,9 @@
 import { Container, Grid, Paper, Typography, TextField, Button, Box, Tab } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 import { useTodoTask } from './useTodoTask';
 import { TaskForm } from './TaskForm';
+import { TaskFormValues } from './TaskForm/TaskForm.types';
 import { DrawerAppBar, ListItems, BasicTabs } from '~/components';
 import { useModal, useTabs } from '~/hooks';
 
@@ -9,9 +11,32 @@ function TodoTask() {
   const { t } = useTranslation('common');
   const { open, handleOpen, handleClose } = useModal();
   const { tabOption, handleChange } = useTabs();
-  const { taskList, filteredTask, deteteTask, completeTask, searchTask, createTask, search } =
-    useTodoTask(tabOption);
+  const {
+    taskList,
+    filteredTask,
+    deteteTask,
+    updateTask,
+    completeTask,
+    searchTask,
+    createTask,
+    search,
+  } = useTodoTask(tabOption);
   const totalTasks = taskList?.length;
+
+  const [defaultValues, setDefaultValues] = useState<TaskFormValues>({ task: '' });
+  const [id, setId] = useState(0);
+
+  const handleUpdate = (id: number, name: string) => {
+    setDefaultValues({ ...defaultValues, task: name });
+    setId(id);
+    handleOpen();
+  };
+
+  const handleCreate = () => {
+    setDefaultValues({ ...defaultValues, task: '' });
+    setId(0);
+    handleOpen();
+  };
 
   return (
     <Container maxWidth='sm' sx={{ p: 0 }}>
@@ -61,6 +86,7 @@ function TodoTask() {
                     <ListItems
                       tasks={filteredTask}
                       deleteItem={deteteTask}
+                      updateTask={handleUpdate}
                       completeItem={completeTask}
                     />
                   ) : (
@@ -78,19 +104,24 @@ function TodoTask() {
                   )}
                 </Paper>
               </Box>
-              <Button fullWidth variant='contained' sx={{ mt: 1.5, mb: 3 }} onClick={handleOpen}>
+              <Button fullWidth variant='contained' sx={{ mt: 1.5, mb: 3 }} onClick={handleCreate}>
                 {t('createTask')}
               </Button>
             </Paper>
           </Grid>
         </DrawerAppBar>
       </Grid>
-      <TaskForm
-        open={open}
-        handleClose={handleClose}
-        title={t('newTask')}
-        handleComplete={createTask}
-      />
+      {open && (
+        <TaskForm
+          open={open}
+          handleClose={handleClose}
+          title={id ? t('editTask') : t('newTask')}
+          handleCreate={createTask}
+          handleUpdate={updateTask}
+          defaultValues={defaultValues}
+          id={id}
+        />
+      )}
     </Container>
   );
 }

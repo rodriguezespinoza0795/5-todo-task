@@ -3,18 +3,18 @@ import { useForm } from 'react-hook-form';
 import { has } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { BasicModalProps } from './TaskForm.types';
+import { TaskFormValues } from './TaskForm.types';
 import { useNotification } from '~/context';
 import { Modal } from '~/components';
-
-interface TaskFormValues {
-  task: string;
-}
 
 export default function TaskFormModal({
   open,
   handleClose,
   title,
-  handleComplete,
+  handleCreate,
+  handleUpdate,
+  defaultValues,
+  id,
 }: BasicModalProps) {
   const { t } = useTranslation('common');
   const notification = useNotification();
@@ -23,11 +23,18 @@ export default function TaskFormModal({
     resetField,
     formState: { errors },
     handleSubmit,
-  } = useForm<TaskFormValues>();
+  } = useForm<TaskFormValues>({
+    defaultValues,
+  });
 
   const createNewTask = handleSubmit(({ task }) => {
-    handleComplete(task);
-    notification?.getSuccess(t('taskCreated'));
+    if (id) {
+      handleUpdate(id, task);
+      notification?.getSuccess(t('taskModified'));
+    } else {
+      handleCreate(task);
+      notification?.getSuccess(t('taskCreated'));
+    }
     handleClose();
     resetField('task');
   });
@@ -61,7 +68,7 @@ export default function TaskFormModal({
           {t('cancel')}
         </Button>
         <Button fullWidth variant='contained' sx={{ mt: 1.5 }} type='submit'>
-          {t('create')}
+          {id ? t('edit') : t('create')}
         </Button>
       </Box>
     </Modal>

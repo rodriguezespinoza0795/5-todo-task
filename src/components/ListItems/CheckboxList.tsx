@@ -11,12 +11,18 @@ import {
   Box,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { useTranslation } from 'react-i18next';
 import { CheckboxListProps } from './CheckboxList.types';
 import { useModal } from '~/hooks';
 import { Modal } from '~/components';
 
-export default function CheckboxList({ tasks, deleteItem, completeItem }: CheckboxListProps) {
+export default function CheckboxList({
+  tasks,
+  deleteItem,
+  completeItem,
+  updateTask,
+}: CheckboxListProps) {
   const { t } = useTranslation('common');
   const { open, handleClose, handleConfirm, handleComplete } = useModal(deleteItem);
 
@@ -34,11 +40,22 @@ export default function CheckboxList({ tasks, deleteItem, completeItem }: Checkb
             <ListItem
               key={id}
               secondaryAction={
-                <Tooltip title={t('delete')}>
-                  <IconButton edge='end' aria-label='comments' onClick={() => handleConfirm(id)}>
-                    <DeleteIcon />
-                  </IconButton>
-                </Tooltip>
+                <>
+                  <Tooltip title={t('edit')}>
+                    <IconButton
+                      edge='end'
+                      aria-label='comments'
+                      onClick={() => updateTask(id, name)}
+                    >
+                      <EditIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title={t('delete')}>
+                    <IconButton edge='end' aria-label='comments' onClick={() => handleConfirm(id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </Tooltip>
+                </>
               }
               disablePadding
             >
@@ -52,7 +69,7 @@ export default function CheckboxList({ tasks, deleteItem, completeItem }: Checkb
                     inputProps={{ 'aria-labelledby': labelId }}
                   />
                 </ListItemIcon>
-                <ListItemText id={labelId} primary={name} />
+                <ListItemText id={labelId} primary={name} sx={{ marginRight: '15px' }} />
               </ListItemButton>
             </ListItem>
           );
