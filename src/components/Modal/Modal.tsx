@@ -1,21 +1,14 @@
-import { Button, Typography, Modal, Box } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { Typography, Modal, Box } from '@mui/material';
+import { BasicModalProps } from './Modal.types';
 
-export interface ConfirmationModalProps {
-  open: boolean;
-  handleClose: () => void;
-  title: string;
-  handleComplete: () => void;
-}
-
-export default function ConfirmationModal({
+export default function BasicModal({
   open,
   handleClose,
   title,
-  handleComplete,
-}: ConfirmationModalProps) {
-  const { t } = useTranslation('common');
-
+  children,
+  isForm = false,
+  onSubmit,
+}: BasicModalProps) {
   return (
     <div>
       <Modal
@@ -25,6 +18,7 @@ export default function ConfirmationModal({
         aria-describedby='modal-modal-description'
       >
         <Box
+          component={isForm ? 'form' : 'div'}
           sx={{
             position: 'absolute' as const,
             top: '50%',
@@ -40,24 +34,12 @@ export default function ConfirmationModal({
             flexDirection: 'column',
             alignItems: 'center',
           }}
+          onSubmit={onSubmit}
         >
           <Typography id='modal-modal-title' variant='h6' component='h6' textAlign={'center'}>
             {title}
           </Typography>
-          <Box sx={{ display: 'flex', width: '100%', gap: '20px' }}>
-            <Button
-              fullWidth
-              variant='outlined'
-              sx={{ mt: 1.5 }}
-              onClick={handleClose}
-              color='error'
-            >
-              {t('cancel')}
-            </Button>
-            <Button fullWidth variant='contained' sx={{ mt: 1.5 }} onClick={handleComplete}>
-              {t('confirm')}
-            </Button>
-          </Box>
+          {children}
         </Box>
       </Modal>
     </div>

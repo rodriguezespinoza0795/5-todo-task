@@ -1,4 +1,4 @@
-import { Container, Grid, Paper, Typography, TextField, Button, Box } from '@mui/material';
+import { Container, Grid, Paper, Typography, TextField, Button, Box, Tab } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useTodoTask } from './useTodoTask';
 import { TaskForm } from './TaskForm';
@@ -44,7 +44,11 @@ function TodoTask() {
                 />
               </Box>
               <Box>
-                <BasicTabs tabOption={tabOption} handleChange={handleChange} />
+                <BasicTabs tabOption={tabOption} handleChange={handleChange}>
+                  <Tab label={t('all')} />
+                  <Tab label={t('pending')} />
+                  <Tab label={t('completed')} />
+                </BasicTabs>
                 <Paper
                   sx={{
                     padding: '1.2em',

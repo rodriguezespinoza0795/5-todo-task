@@ -7,6 +7,8 @@ import {
   Checkbox,
   IconButton,
   Tooltip,
+  Button,
+  Box,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
@@ -16,7 +18,7 @@ import { Modal } from '~/components';
 
 export default function CheckboxList({ tasks, deleteItem, completeItem }: CheckboxListProps) {
   const { t } = useTranslation('common');
-  const { open, handleClose, handleconfirm, handlecomplete } = useModal(deleteItem);
+  const { open, handleClose, handleConfirm, handleComplete } = useModal(deleteItem);
 
   return (
     <>
@@ -33,7 +35,7 @@ export default function CheckboxList({ tasks, deleteItem, completeItem }: Checkb
               key={id}
               secondaryAction={
                 <Tooltip title={t('delete')}>
-                  <IconButton edge='end' aria-label='comments' onClick={() => handleconfirm(id)}>
+                  <IconButton edge='end' aria-label='comments' onClick={() => handleConfirm(id)}>
                     <DeleteIcon />
                   </IconButton>
                 </Tooltip>
@@ -56,12 +58,16 @@ export default function CheckboxList({ tasks, deleteItem, completeItem }: Checkb
           );
         })}
       </List>
-      <Modal
-        open={open}
-        handleClose={handleClose}
-        title={t('confirmDeleteTask')}
-        handleComplete={handlecomplete}
-      />
+      <Modal open={open} handleClose={handleClose} title={t('confirmDeleteTask')}>
+        <Box sx={{ display: 'flex', width: '100%', gap: '20px' }}>
+          <Button fullWidth variant='outlined' sx={{ mt: 1.5 }} onClick={handleClose} color='error'>
+            {t('cancel')}
+          </Button>
+          <Button fullWidth variant='contained' sx={{ mt: 1.5 }} onClick={handleComplete}>
+            {t('confirm')}
+          </Button>
+        </Box>
+      </Modal>
     </>
   );
 }

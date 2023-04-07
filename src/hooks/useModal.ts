@@ -6,12 +6,12 @@ export const useModal = (deleteFn?: (id: number) => void) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleconfirm = (id: number) => {
+  const handleConfirm = (id: number) => {
     setId(id);
     handleOpen();
   };
 
-  const handlecomplete = () => {
+  const handleComplete = () => {
     if (deleteFn) {
       deleteFn(id);
     }
@@ -22,7 +22,7 @@ export const useModal = (deleteFn?: (id: number) => void) => {
     open,
     handleOpen,
     handleClose,
-    handleconfirm,
-    handlecomplete,
+    handleConfirm,
+    handleComplete,
   };
 };

@@ -1,14 +1,7 @@
-import { Tabs, Tab, Box } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { Tabs, Box } from '@mui/material';
+import { BasicTabsProps } from './Tabs.types';
 
-export default function BasicTabs({
-  tabOption,
-  handleChange,
-}: {
-  tabOption: number;
-  handleChange: (event: React.SyntheticEvent, tabOption: number) => void;
-}) {
-  const { t } = useTranslation('common');
+export default function BasicTabs({ tabOption, handleChange, children }: BasicTabsProps) {
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -18,9 +11,7 @@ export default function BasicTabs({
           aria-label='basic tabs example'
           variant='fullWidth'
         >
-          <Tab label={t('all')} />
-          <Tab label={t('pending')} />
-          <Tab label={t('completed')} />
+          {children}
         </Tabs>
       </Box>
     </Box>
