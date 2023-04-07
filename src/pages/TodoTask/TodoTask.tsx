@@ -1,9 +1,7 @@
 import { Container, Grid, Paper, Typography, TextField, Button, Box, Tab } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
 import { useTodoTask } from './useTodoTask';
-import { TaskForm } from './TaskForm';
-import { TaskFormValues } from './TaskForm/TaskForm.types';
+import TaskForm from './TaskForm';
 import { DrawerAppBar, ListItems, BasicTabs } from '~/components';
 import { useModal, useTabs } from '~/hooks';
 
@@ -20,23 +18,12 @@ function TodoTask() {
     searchTask,
     createTask,
     search,
-  } = useTodoTask(tabOption);
+    handleUpdate,
+    handleCreate,
+    id,
+    defaultValues,
+  } = useTodoTask(tabOption, handleOpen);
   const totalTasks = taskList?.length;
-
-  const [defaultValues, setDefaultValues] = useState<TaskFormValues>({ task: '' });
-  const [id, setId] = useState(0);
-
-  const handleUpdate = (id: number, name: string) => {
-    setDefaultValues({ ...defaultValues, task: name });
-    setId(id);
-    handleOpen();
-  };
-
-  const handleCreate = () => {
-    setDefaultValues({ ...defaultValues, task: '' });
-    setId(0);
-    handleOpen();
-  };
 
   return (
     <Container maxWidth='sm' sx={{ p: 0 }}>

@@ -5,6 +5,7 @@
   "searchTask": "Buscar tarea",
   "createTask": "Crear nueva tarea",
   "requiredTask": "La tarea es requerida",
+  "requiredDueDate": "La fecha es requerida",
   "taskMinLength":"La tarea tiene que tener mínimo 5 caracteres",
   "task": "Tarea",
   "taskCreated": "Se creó una nueva tarea",
@@ -22,5 +23,6 @@
   "noPendingTasks": "Sin tareas pendientes",
   "all": "Todos",
   "pending": "Pendientes",
-  "completed": "Completados"
+  "completed": "Completados",
+  "dueDate":"Fecha de vencimiento"
 }

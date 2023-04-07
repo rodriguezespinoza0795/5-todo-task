@@ -5,6 +5,7 @@
   "searchTask": "Search task",
   "createTask": "Create new task",
   "requiredTask": "Task is required",
+  "requiredDueDate": "Due date is required",
   "taskMinLength":"Task cannot be less than 5 character",
   "task": "Task",
   "taskCreated": "A new task was newTask",
@@ -22,5 +23,6 @@
   "noPendingTasks": "No pending tasks",
   "all": "All",
   "pending": "Pending",
-  "completed": "Completed"
+  "completed": "Completed",
+  "dueDate":"Due date"
 }

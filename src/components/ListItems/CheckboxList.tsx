@@ -13,6 +13,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useTranslation } from 'react-i18next';
+import { format } from 'date-fns';
 import { CheckboxListProps } from './CheckboxList.types';
 import { useModal } from '~/hooks';
 import { Modal } from '~/components';
@@ -33,7 +34,7 @@ export default function CheckboxList({
           width: '100%',
         }}
       >
-        {tasks.map(({ name, id, completed }) => {
+        {tasks.map(({ task, id, completed, dueDate }) => {
           const labelId = `checkbox-list-label-${id}`;
 
           return (
@@ -45,7 +46,7 @@ export default function CheckboxList({
                     <IconButton
                       edge='end'
                       aria-label='comments'
-                      onClick={() => updateTask(id, name)}
+                      onClick={() => updateTask(id, { task: task, dueDate: dueDate })}
                     >
                       <EditIcon />
                     </IconButton>
@@ -69,7 +70,12 @@ export default function CheckboxList({
                     inputProps={{ 'aria-labelledby': labelId }}
                   />
                 </ListItemIcon>
-                <ListItemText id={labelId} primary={name} sx={{ marginRight: '15px' }} />
+                <ListItemText
+                  id={labelId}
+                  primary={task}
+                  secondary={format(dueDate, 'MM/dd/yyyy')}
+                  sx={{ marginRight: '15px' }}
+                />
               </ListItemButton>
             </ListItem>
           );

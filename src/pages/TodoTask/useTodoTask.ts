@@ -1,25 +1,36 @@
 import { useState, useEffect } from 'react';
 import { isEmpty, last, includes, lowerCase } from 'lodash';
-import { Task } from './TodoTask.types';
+import { Task, TaskLocalstorage, TaskFormValues } from './TodoTask.types';
 import { getItem, setItem } from '~/utils';
 
-export const useTodoTask = (tabOption: number) => {
-  const initialTasks = getItem('taskList') || [];
-  const [taskList, setTaskList] = useState<Task[]>(initialTasks);
+export const useTodoTask = (tabOption: number, handleOpen: () => void) => {
+  const initialTasks = getItem('taskList');
+  const parsedInitialTasks = initialTasks
+    ? initialTasks.map((task: TaskLocalstorage) => ({
+        ...task,
+        dueDate: new Date(task.dueDate),
+      }))
+    : [];
+  const [taskList, setTaskList] = useState<Task[]>(parsedInitialTasks);
   const [filteredTask, setFilteredTask] = useState<Task[]>([]);
   const [search, setSearch] = useState('');
+  const [defaultValues, setDefaultValues] = useState<TaskFormValues>({
+    task: '',
+    dueDate: new Date(),
+  });
+  const [id, setId] = useState(0);
 
-  const createTask = (newTask: string) => {
+  const createTask = (newTask: TaskFormValues) => {
     const newID = isEmpty(taskList) ? 1 : (last(taskList)?.id as number) + 1;
-    const newTaskList = [...taskList, { id: newID, name: newTask, completed: false }];
+    const newTaskList = [...taskList, { ...newTask, id: newID, completed: false }];
     setTaskList(newTaskList);
   };
 
-  const updateTask = (id: number, newTask: string) => {
+  const updateTask = (id: number, newTask: TaskFormValues) => {
     setTaskList(
       taskList.map((task) => {
         if (task.id === id) {
-          return { ...task, name: newTask };
+          return { ...task, ...newTask };
         }
         return task;
       }),
@@ -37,7 +48,7 @@ export const useTodoTask = (tabOption: number) => {
   useEffect(() => {
     let taskType = taskList;
     if (search) {
-      taskType = taskType.filter(({ name }) => includes(lowerCase(name), lowerCase(search)));
+      taskType = taskType.filter(({ task }) => includes(lowerCase(task), lowerCase(search)));
     }
     if (tabOption) {
       taskType = taskType.filter(({ completed }) => (tabOption === 2 ? completed : !completed));
@@ -60,6 +71,18 @@ export const useTodoTask = (tabOption: number) => {
     );
   };
 
+  const handleUpdate = (id: number, data: TaskFormValues) => {
+    setDefaultValues({ ...defaultValues, ...data });
+    setId(id);
+    handleOpen();
+  };
+
+  const handleCreate = () => {
+    setDefaultValues({ ...defaultValues, task: '', dueDate: new Date() });
+    setId(0);
+    handleOpen();
+  };
+
   return {
     taskList,
     filteredTask,
@@ -70,5 +93,9 @@ export const useTodoTask = (tabOption: number) => {
     search,
     initialTasks,
     updateTask,
+    handleUpdate,
+    handleCreate,
+    id,
+    defaultValues,
   };
 };
