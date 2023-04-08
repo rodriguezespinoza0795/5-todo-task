@@ -31,5 +31,12 @@
   "usernameMinLength":"Username cannot be less than 5 character",
   "password": "Password",
   "PasswordMinLength": "Password cannot be less than 8 character",
-  "requiredPassword": "Password is required"
+  "requiredPassword": "Password is required",
+  "signIn": "Login",
+  "forgottenPassword": "Forgot your password?",
+  "noAccount": "Don't have an account?",
+  "haveAccount": "Already have an account?",
+  "signUp": "Sign up",
+  "email":"Email",
+  "requiredEmail":"Email is required"
 }

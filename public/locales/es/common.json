@@ -31,5 +31,12 @@
   "usernameMinLength":"El nombre de usuario tiene que tener mínimo 5 caracteres",
   "password": "Contraseña",
   "PasswordMinLength": "La contraseña tiene que tener mínimo 8 caracteres",
-  "requiredPassword": "Contraseña requerida"
+  "requiredPassword": "Contraseña requerida",
+  "signIn":"Iniciar sesión",
+  "forgottenPassword":"¿Olvidaste tu contraseña?",
+  "noAccount": "¿Aún no tiene cuenta?",
+  "haveAccount": "¿Ya tienes cuenta?",
+  "signUp": "Regístrate",
+  "email":"Correo electrónico",
+  "requiredEmail":"Correo electrónico requerido"
 }
