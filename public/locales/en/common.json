@@ -24,5 +24,12 @@
   "all": "All",
   "pending": "Pending",
   "completed": "Completed",
-  "dueDate":"Due date"
+  "dueDate":"Due date",
+
+  "username": "Username",
+  "requiredUsername": "Username is required",
+  "usernameMinLength":"Username cannot be less than 5 character",
+  "password": "Password",
+  "PasswordMinLength": "Password cannot be less than 8 character",
+  "requiredPassword": "Password is required"
 }

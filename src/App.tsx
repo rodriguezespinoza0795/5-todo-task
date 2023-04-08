@@ -1,7 +1,7 @@
-import { TodoTask } from '~/pages';
+import { Login } from '~/pages';
 
 function App() {
-  return <TodoTask />;
+  return <Login />;
 }
 
 export default App;

@@ -24,5 +24,12 @@
   "all": "Todos",
   "pending": "Pendientes",
   "completed": "Completados",
-  "dueDate":"Fecha de vencimiento"
+  "dueDate":"Fecha de vencimiento",
+
+  "username": "Nombre de usuario",
+  "requiredUsername": "Nombre de usuario requerido",
+  "usernameMinLength":"El nombre de usuario tiene que tener mínimo 5 caracteres",
+  "password": "Contraseña",
+  "PasswordMinLength": "La contraseña tiene que tener mínimo 8 caracteres",
+  "requiredPassword": "Contraseña requerida"
 }
