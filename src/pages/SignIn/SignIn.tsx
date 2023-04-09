@@ -20,6 +20,7 @@ import { useTranslation } from 'react-i18next';
 import { has } from 'lodash';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { setItem } from '~/utils';
 
 export interface SignInFormValues {
   email: string;
@@ -37,7 +38,8 @@ function SignIn() {
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit((data) => {
-    console.log('data', data);
+    setItem('usarData', data);
+    window.location.reload();
     navigate('/');
   });
 

@@ -38,5 +38,6 @@
   "haveAccount": "Already have an account?",
   "signUp": "Sign up",
   "email":"Email",
-  "requiredEmail":"Email is required"
+  "requiredEmail":"Email is required",
+  "logOut":"Log out"
 }

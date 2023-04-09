@@ -38,5 +38,6 @@
   "haveAccount": "¿Ya tienes cuenta?",
   "signUp": "Regístrate",
   "email":"Correo electrónico",
-  "requiredEmail":"Correo electrónico requerido"
+  "requiredEmail":"Correo electrónico requerido",
+  "logOut":"Cerrar sesión"
 }

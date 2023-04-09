@@ -24,10 +24,10 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
-import LoginIcon from '@mui/icons-material/Login';
 import { DrawerAppBarProps } from './DrawerAppBar.types';
 import { useDrawerAppbar } from './useDrawerAppBar';
 import { useThemeMode } from '~/context';
+import { getItem, removeItem } from '~/utils';
 
 const drawerWidth = 240;
 
@@ -37,7 +37,8 @@ export default function DrawerAppBar(props: DrawerAppBarProps) {
   const theme = useTheme();
   const colorMode = useThemeMode();
   const { handleDrawerToggle, handleLanguage, mobileOpen } = useDrawerAppbar();
-  const [auth, setAuth] = useState(false);
+  const registered = getItem('usarData');
+  const [auth, setAuth] = useState(registered);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
 
@@ -47,6 +48,14 @@ export default function DrawerAppBar(props: DrawerAppBarProps) {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const logOut = () => {
+    handleClose();
+    setAuth(false);
+    removeItem('usarData');
+    location.reload();
+    navigate('/signIn');
   };
 
   const drawer = (
@@ -114,7 +123,7 @@ export default function DrawerAppBar(props: DrawerAppBarProps) {
               </IconButton>
             </Tooltip>
           </Box>
-          {auth ? (
+          {auth && (
             <div>
               <IconButton
                 size='large'
@@ -141,22 +150,9 @@ export default function DrawerAppBar(props: DrawerAppBarProps) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>{t('signIn')}</MenuItem>
+                <MenuItem onClick={logOut}>{t('logOut')}</MenuItem>
               </Menu>
             </div>
-          ) : (
-            <Tooltip title={t('signIn')}>
-              <IconButton
-                size='large'
-                aria-label='language system'
-                aria-controls='menu-appbar'
-                aria-haspopup='true'
-                onClick={() => navigate('/signIn')}
-                color='inherit'
-              >
-                <LoginIcon />
-              </IconButton>
-            </Tooltip>
           )}
         </Toolbar>
       </AppBar>
