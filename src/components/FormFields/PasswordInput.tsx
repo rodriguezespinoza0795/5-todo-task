@@ -10,16 +10,9 @@ import {
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { has } from 'lodash';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import { SignInFormValues } from '~/pages/SignIn/SignIn.types';
+import { UseFormRegister } from 'react-hook-form';
 
-const PasswordInput = ({
-  errors,
-  register,
-}: {
-  errors: FieldErrors<SignInFormValues>;
-  register: UseFormRegister<SignInFormValues>;
-}) => {
+const PasswordInput = ({ errors, register }: { errors: any; register: UseFormRegister<any> }) => {
   const { t } = useTranslation('common');
 
   const [showPassword, setShowPassword] = useState(false);
@@ -41,10 +34,6 @@ const PasswordInput = ({
         type={showPassword ? 'text' : 'password'}
         {...register('password', {
           required: { value: true, message: t('requiredPassword') },
-          minLength: {
-            value: 8,
-            message: t('PasswordMinLength'),
-          },
         })}
         endAdornment={
           <InputAdornment position='end'>

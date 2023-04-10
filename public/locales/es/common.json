@@ -41,5 +41,6 @@
   "requiredEmail":"Correo electrónico requerido",
   "logOut":"Cerrar sesión",
   "resetPassword":"Restablecer la contraseña",
-  "reset": "Restablecer"
+  "reset": "Restablecer",
+  "wrongEmailPassword":"Correo o contraseña incorrecta"
 }

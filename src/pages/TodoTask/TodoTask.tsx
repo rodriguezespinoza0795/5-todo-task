@@ -32,7 +32,12 @@ function TodoTask() {
         direction='column'
         alignItems='center'
         justifyContent='center'
-        sx={{ minHeight: '100vh', maxWidth: '600px' }}
+        sx={{
+          minHeight: '100vh',
+          maxWidth: '600px',
+          justifyContent: { sm: 'center' },
+          paddingTop: { xs: '2rem' },
+        }}
       >
         <DrawerAppBar>
           <Grid item>

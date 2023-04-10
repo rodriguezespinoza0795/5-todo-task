@@ -1,9 +1,9 @@
-import { Container, Grid, Paper, Typography, TextField, Button, Box } from '@mui/material';
+import { Container, Grid, Paper, Typography, Button, Box } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { has } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import { DrawerAppBar } from '~/components';
+import { TextFieldForm } from '~/components/FormFields';
 
 interface PasswordResetFormValues {
   email: string;
@@ -31,7 +31,12 @@ function PasswordReset() {
         direction='column'
         alignItems='center'
         justifyContent='center'
-        sx={{ minHeight: '100vh', maxWidth: '600px' }}
+        sx={{
+          minHeight: '100vh',
+          maxWidth: '600px',
+          justifyContent: { sm: 'center' },
+          paddingTop: { xs: '2rem' },
+        }}
       >
         <DrawerAppBar>
           <Grid item>
@@ -40,18 +45,7 @@ function PasswordReset() {
                 {t('resetPassword')}
               </Typography>
               <Box component='form' onSubmit={onSubmit}>
-                <TextField
-                  margin='normal'
-                  type='text'
-                  fullWidth
-                  label={t('email')}
-                  sx={{ mt: 2, mb: 1.5 }}
-                  {...register('email', {
-                    required: { value: true, message: t('requiredEmail') },
-                  })}
-                  error={has(errors, 'email')}
-                  helperText={errors?.email?.message}
-                />
+                <TextFieldForm errors={errors} register={register} />
                 <Button fullWidth variant='contained' sx={{ mt: 1.5 }} type='submit'>
                   {t('reset')}
                 </Button>

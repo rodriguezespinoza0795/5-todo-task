@@ -3,7 +3,7 @@ import { TodoTask, SignIn, SignUp, PasswordReset } from './pages';
 import { getItem } from '~/utils';
 
 export const AppRouter = () => {
-  const registered = getItem('usarData');
+  const registered = getItem('JWTtoken');
   return (
     <Routes>
       {registered ? (

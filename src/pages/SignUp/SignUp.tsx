@@ -1,26 +1,10 @@
-import { useState } from 'react';
-import {
-  Container,
-  Grid,
-  Paper,
-  Typography,
-  TextField,
-  Button,
-  Box,
-  Link,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  InputAdornment,
-  IconButton,
-  FormHelperText,
-} from '@mui/material';
+import { Container, Grid, Paper, Typography, TextField, Button, Box, Link } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { has } from 'lodash';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { DrawerAppBar } from '~/components';
+import { TextFieldForm, PasswordInput } from '~/components/FormFields';
 
 export interface SignUpFormValues {
   email: string;
@@ -43,12 +27,6 @@ function SignUp() {
     navigate('/signIn');
   });
 
-  const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
-
   return (
     <Container maxWidth='sm' sx={{ p: 0 }}>
       <Grid
@@ -56,7 +34,12 @@ function SignUp() {
         direction='column'
         alignItems='center'
         justifyContent='center'
-        sx={{ minHeight: '100vh', maxWidth: '600px' }}
+        sx={{
+          minHeight: '100vh',
+          maxWidth: '600px',
+          justifyContent: { sm: 'center' },
+          paddingTop: { xs: '2rem' },
+        }}
       >
         <DrawerAppBar>
           <Grid item>
@@ -65,18 +48,7 @@ function SignUp() {
                 {t('signUp')}
               </Typography>
               <Box component='form' onSubmit={onSubmit}>
-                <TextField
-                  margin='normal'
-                  type='text'
-                  fullWidth
-                  label={t('email')}
-                  sx={{ mt: 2, mb: 1.5 }}
-                  {...register('email', {
-                    required: { value: true, message: t('requiredEmail') },
-                  })}
-                  error={has(errors, 'email')}
-                  helperText={errors?.email?.message}
-                />
+                <TextFieldForm errors={errors} register={register} />
                 <TextField
                   margin='normal'
                   type='text'
@@ -93,39 +65,7 @@ function SignUp() {
                   error={has(errors, 'username')}
                   helperText={errors?.username?.message}
                 />
-                <FormControl
-                  error={has(errors, 'password')}
-                  fullWidth
-                  variant='outlined'
-                  sx={{ mt: 2, mb: 1.5 }}
-                >
-                  <InputLabel htmlFor='outlined-adornment-password'>{t('password')}</InputLabel>
-                  <OutlinedInput
-                    id='outlined-adornment-password'
-                    type={showPassword ? 'text' : 'password'}
-                    {...register('password', {
-                      required: { value: true, message: t('requiredPassword') },
-                      minLength: {
-                        value: 8,
-                        message: t('PasswordMinLength'),
-                      },
-                    })}
-                    endAdornment={
-                      <InputAdornment position='end'>
-                        <IconButton
-                          aria-label='toggle password visibility'
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge='end'
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                    label={t('password')}
-                  />
-                  <FormHelperText>{errors?.password?.message}</FormHelperText>
-                </FormControl>
+                <PasswordInput errors={errors} register={register} />
                 <Button fullWidth variant='contained' sx={{ mt: 1.5 }} type='submit'>
                   {t('signUp')}
                 </Button>

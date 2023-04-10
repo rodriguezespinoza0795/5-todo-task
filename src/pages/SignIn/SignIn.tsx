@@ -1,12 +1,11 @@
-import { Container, Grid, Paper, Typography, TextField, Button, Box, Link } from '@mui/material';
+import { Container, Grid, Paper, Typography, Button, Box, Link } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { has } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import { SignInFormValues } from './SignIn.types';
-import { setItem } from '~/utils';
+import { useSignIn } from './useSignIn';
 import { DrawerAppBar } from '~/components';
-import { PasswordInput } from '~/components/FormFields';
+import { PasswordInput, TextFieldForm } from '~/components/FormFields';
 
 function SignIn() {
   const {
@@ -17,12 +16,7 @@ function SignIn() {
 
   const { t } = useTranslation('common');
   const navigate = useNavigate();
-
-  const onSubmit = handleSubmit((data) => {
-    setItem('usarData', data);
-    window.location.reload();
-    navigate('/');
-  });
+  const { onSubmit } = useSignIn();
 
   return (
     <Container maxWidth='sm' sx={{ p: 0 }}>
@@ -30,8 +24,12 @@ function SignIn() {
         container
         direction='column'
         alignItems='center'
-        justifyContent='center'
-        sx={{ minHeight: '100vh', maxWidth: '600px' }}
+        sx={{
+          minHeight: '100vh',
+          maxWidth: '600px',
+          justifyContent: { sm: 'center' },
+          paddingTop: { xs: '2rem' },
+        }}
       >
         <DrawerAppBar>
           <Grid item>
@@ -39,19 +37,8 @@ function SignIn() {
               <Typography sx={{ mt: 1, mb: 1, textAlign: 'center' }} variant='h4'>
                 {t('signIn')}
               </Typography>
-              <Box component='form' onSubmit={onSubmit}>
-                <TextField
-                  margin='normal'
-                  type='text'
-                  fullWidth
-                  label={t('email')}
-                  sx={{ mt: 2, mb: 1.5 }}
-                  {...register('email', {
-                    required: { value: true, message: t('requiredEmail') },
-                  })}
-                  error={has(errors, 'email')}
-                  helperText={errors?.email?.message}
-                />
+              <Box component='form' onSubmit={handleSubmit(onSubmit)}>
+                <TextFieldForm errors={errors} register={register} />
                 <PasswordInput errors={errors} register={register} />
                 <Link onClick={() => navigate('/reset')} underline='hover'>
                   {t('forgottenPassword')}

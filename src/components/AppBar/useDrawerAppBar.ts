@@ -5,7 +5,7 @@ import { getItem, removeItem } from '~/utils';
 
 export const useDrawerAppbar = () => {
   const navigate = useNavigate();
-  const registered = getItem('usarData');
+  const registered = getItem('JWTtoken');
   const [mobileOpen, setMobileOpen] = useState(false);
   const { i18n } = useTranslation('common');
   const [auth, setAuth] = useState(registered);
@@ -32,7 +32,7 @@ export const useDrawerAppbar = () => {
   const logOut = () => {
     handleClose();
     setAuth(false);
-    removeItem('usarData');
+    removeItem('JWTtoken');
     location.reload();
     navigate('/signIn');
   };
