@@ -39,5 +39,7 @@
   "signUp": "Regístrate",
   "email":"Correo electrónico",
   "requiredEmail":"Correo electrónico requerido",
-  "logOut":"Cerrar sesión"
+  "logOut":"Cerrar sesión",
+  "resetPassword":"Restablecer la contraseña",
+  "reset": "Restablecer"
 }

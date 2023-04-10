@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   AppBar,
   Box,
@@ -13,8 +12,6 @@ import {
   Typography,
   IconButton,
   Tooltip,
-  Menu,
-  MenuItem,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import TranslateIcon from '@mui/icons-material/Translate';
@@ -22,12 +19,10 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import { useNavigate } from 'react-router-dom';
 import { DrawerAppBarProps } from './DrawerAppBar.types';
 import { useDrawerAppbar } from './useDrawerAppBar';
+import MenuProfile from './MenuProfile';
 import { useThemeMode } from '~/context';
-import { getItem, removeItem } from '~/utils';
 
 const drawerWidth = 240;
 
@@ -36,27 +31,7 @@ export default function DrawerAppBar(props: DrawerAppBarProps) {
   const { t } = useTranslation('common');
   const theme = useTheme();
   const colorMode = useThemeMode();
-  const { handleDrawerToggle, handleLanguage, mobileOpen } = useDrawerAppbar();
-  const registered = getItem('usarData');
-  const [auth, setAuth] = useState(registered);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const navigate = useNavigate();
-
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const logOut = () => {
-    handleClose();
-    setAuth(false);
-    removeItem('usarData');
-    location.reload();
-    navigate('/signIn');
-  };
+  const { handleDrawerToggle, handleLanguage, mobileOpen, auth } = useDrawerAppbar();
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -123,37 +98,7 @@ export default function DrawerAppBar(props: DrawerAppBarProps) {
               </IconButton>
             </Tooltip>
           </Box>
-          {auth && (
-            <div>
-              <IconButton
-                size='large'
-                aria-label='account of current user'
-                aria-controls='menu-appbar'
-                aria-haspopup='true'
-                onClick={handleMenu}
-                color='inherit'
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id='menu-appbar'
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={logOut}>{t('logOut')}</MenuItem>
-              </Menu>
-            </div>
-          )}
+          {auth && <MenuProfile />}
         </Toolbar>
       </AppBar>
       <Box component='nav'>

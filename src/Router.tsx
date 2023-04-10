@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { TodoTask, SignIn, SignUp } from './pages';
+import { TodoTask, SignIn, SignUp, PasswordReset } from './pages';
 import { getItem } from '~/utils';
 
 export const AppRouter = () => {
@@ -15,6 +15,7 @@ export const AppRouter = () => {
         <>
           <Route path='/SignIn' element={<SignIn />} />
           <Route path='/SignUp' element={<SignUp />} />
+          <Route path='/Reset' element={<PasswordReset />} />
           <Route path='*' element={<SignIn />} />
         </>
       )}
