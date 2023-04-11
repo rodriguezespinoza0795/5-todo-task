@@ -15,6 +15,8 @@ const TextFieldInput = ({ errors, register }: { errors: any; register: UseFormRe
       sx={{ mt: 2, mb: 1.5 }}
       {...register('email', {
         required: { value: true, message: t('requiredEmail') },
+        validate: (value) =>
+          RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}')?.test(value) || (t('invalidEmail') as string),
       })}
       error={has(errors, 'email')}
       helperText={errors?.email?.message}

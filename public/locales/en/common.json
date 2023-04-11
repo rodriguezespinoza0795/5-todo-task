@@ -42,5 +42,8 @@
   "logOut":"Log out",
   "resetPassword":"Reset password",
   "reset": "Reset",
-  "wrongEmailPassword":"Wrong email or password"
+  "wrongEmailPassword":"Wrong email or password",
+  "emailNoRegistered":"Email has not been registered",
+  "recoveryEmailSent":"Recovery email has been sent",
+  "invalidEmail":"Invalid email"
 }

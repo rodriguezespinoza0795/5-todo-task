@@ -1,13 +1,10 @@
 import { Container, Grid, Paper, Typography, Button, Box } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { PasswordResetFormValues } from './PasswordReset.types';
+import { usePasswordReset } from './usePasswordReset';
 import { DrawerAppBar } from '~/components';
 import { TextFieldForm } from '~/components/FormFields';
-
-interface PasswordResetFormValues {
-  email: string;
-}
 
 function PasswordReset() {
   const {
@@ -17,12 +14,7 @@ function PasswordReset() {
   } = useForm<PasswordResetFormValues>();
 
   const { t } = useTranslation('common');
-  const navigate = useNavigate();
-
-  const onSubmit = handleSubmit((data) => {
-    console.log('data', data);
-    navigate('/SignIn');
-  });
+  const { onSubmit } = usePasswordReset();
 
   return (
     <Container maxWidth='sm' sx={{ p: 0 }}>
@@ -40,11 +32,11 @@ function PasswordReset() {
       >
         <DrawerAppBar>
           <Grid item>
-            <Paper sx={{ padding: '1.2em', borderRadius: '0.5em' }}>
+            <Paper sx={{ padding: '1.2em', borderRadius: '0.5em', minWidth: '380px' }}>
               <Typography sx={{ mt: 1, mb: 1, textAlign: 'center' }} variant='h4'>
                 {t('resetPassword')}
               </Typography>
-              <Box component='form' onSubmit={onSubmit}>
+              <Box component='form' onSubmit={handleSubmit(onSubmit)}>
                 <TextFieldForm errors={errors} register={register} />
                 <Button fullWidth variant='contained' sx={{ mt: 1.5 }} type='submit'>
                   {t('reset')}

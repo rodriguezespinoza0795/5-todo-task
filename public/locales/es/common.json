@@ -42,5 +42,8 @@
   "logOut":"Cerrar sesión",
   "resetPassword":"Restablecer la contraseña",
   "reset": "Restablecer",
-  "wrongEmailPassword":"Correo o contraseña incorrecta"
+  "wrongEmailPassword":"Correo o contraseña incorrecta",
+  "emailNoRegistered":"El correo no ha sido registrado",
+  "recoveryEmailSent":"Se envió el correo de recuperación",
+  "invalidEmail":"Correo inválido"
 }
