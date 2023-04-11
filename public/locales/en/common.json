@@ -45,5 +45,7 @@
   "wrongEmailPassword":"Wrong email or password",
   "emailNoRegistered":"Email has not been registered",
   "recoveryEmailSent":"Recovery email has been sent",
-  "invalidEmail":"Invalid email"
+  "invalidEmail":"Invalid email",
+  "emailRegistered":"Email has already been registered",
+  "usernameRegistered":"Username has already been registered"
 }

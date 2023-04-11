@@ -45,5 +45,7 @@
   "wrongEmailPassword":"Correo o contraseña incorrecta",
   "emailNoRegistered":"El correo no ha sido registrado",
   "recoveryEmailSent":"Se envió el correo de recuperación",
-  "invalidEmail":"Correo inválido"
+  "invalidEmail":"Correo inválido",
+  "emailRegistered":"El correo ya ha sido registrado",
+  "usernameRegistered":"El nombre de usuario ya ha sido registrado"
 }

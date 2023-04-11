@@ -34,6 +34,10 @@ const PasswordInput = ({ errors, register }: { errors: any; register: UseFormReg
         type={showPassword ? 'text' : 'password'}
         {...register('password', {
           required: { value: true, message: t('requiredPassword') },
+          minLength: {
+            value: 8,
+            message: t('PasswordMinLength'),
+          },
         })}
         endAdornment={
           <InputAdornment position='end'>

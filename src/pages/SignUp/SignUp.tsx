@@ -3,14 +3,10 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { has } from 'lodash';
 import { useNavigate } from 'react-router-dom';
+import { SignUpFormValues } from './SignUp.types';
+import { useSignUp } from './useSignUp';
 import { DrawerAppBar } from '~/components';
 import { TextFieldForm, PasswordInput } from '~/components/FormFields';
-
-export interface SignUpFormValues {
-  email: string;
-  username: string;
-  password: string;
-}
 
 function SignUp() {
   const {
@@ -21,11 +17,7 @@ function SignUp() {
 
   const { t } = useTranslation('common');
   const navigate = useNavigate();
-
-  const onSubmit = handleSubmit((data) => {
-    console.log('data', data);
-    navigate('/signIn');
-  });
+  const { onSubmit } = useSignUp();
 
   return (
     <Container maxWidth='sm' sx={{ p: 0 }}>
@@ -47,7 +39,7 @@ function SignUp() {
               <Typography sx={{ mt: 1, mb: 1, textAlign: 'center' }} variant='h4'>
                 {t('signUp')}
               </Typography>
-              <Box component='form' onSubmit={onSubmit}>
+              <Box component='form' onSubmit={handleSubmit(onSubmit)}>
                 <TextFieldForm errors={errors} register={register} />
                 <TextField
                   margin='normal'
