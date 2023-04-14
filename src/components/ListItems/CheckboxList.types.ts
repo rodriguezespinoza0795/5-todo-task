@@ -1,6 +1,13 @@
 export interface TaskFormValues {
   task: string;
   dueDate: Date;
+  category: Category;
+}
+
+export interface Category {
+  value: number;
+  label: string;
+  color: string;
 }
 
 export interface CheckboxListProps {
@@ -15,4 +22,5 @@ interface Task {
   task: string;
   completed: boolean;
   dueDate: Date;
+  category: Category;
 }

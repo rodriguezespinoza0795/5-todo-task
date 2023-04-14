@@ -34,7 +34,7 @@ export default function CheckboxList({
           width: '100%',
         }}
       >
-        {tasks.map(({ task, id, completed, dueDate }) => {
+        {tasks.map(({ task, id, completed, dueDate, category }) => {
           const labelId = `checkbox-list-label-${id}`;
 
           return (
@@ -46,7 +46,9 @@ export default function CheckboxList({
                     <IconButton
                       edge='end'
                       aria-label='comments'
-                      onClick={() => updateTask(id, { task: task, dueDate: dueDate })}
+                      onClick={() =>
+                        updateTask(id, { task: task, dueDate: dueDate, category: category })
+                      }
                     >
                       <EditIcon />
                     </IconButton>
@@ -73,7 +75,7 @@ export default function CheckboxList({
                 <ListItemText
                   id={labelId}
                   primary={task}
-                  secondary={format(dueDate, 'MM/dd/yyyy')}
+                  secondary={` ${category.label} → ${format(dueDate, 'MM/dd/yyyy')}`}
                   sx={{ marginRight: '15px' }}
                 />
               </ListItemButton>

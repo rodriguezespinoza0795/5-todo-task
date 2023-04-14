@@ -17,6 +17,7 @@ export const useTodoTask = (tabOption: number, handleOpen: () => void) => {
   const [defaultValues, setDefaultValues] = useState<TaskFormValues>({
     task: '',
     dueDate: new Date(),
+    category: { value: 0, label: '', color: '' },
   });
   const [id, setId] = useState(0);
 
@@ -78,7 +79,12 @@ export const useTodoTask = (tabOption: number, handleOpen: () => void) => {
   };
 
   const handleCreate = () => {
-    setDefaultValues({ ...defaultValues, task: '', dueDate: new Date() });
+    setDefaultValues({
+      ...defaultValues,
+      task: '',
+      dueDate: new Date(),
+      category: { value: 0, label: '', color: '' },
+    });
     setId(0);
     handleOpen();
   };

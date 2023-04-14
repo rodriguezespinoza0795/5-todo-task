@@ -47,5 +47,7 @@
   "recoveryEmailSent":"Recovery email has been sent",
   "invalidEmail":"Invalid email",
   "emailRegistered":"Email has already been registered",
-  "usernameRegistered":"Username has already been registered"
+  "usernameRegistered":"Username has already been registered",
+  "category":"Category",
+  "requiredCategory":"Category is required"
 }

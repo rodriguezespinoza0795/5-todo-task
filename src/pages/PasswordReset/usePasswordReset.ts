@@ -11,7 +11,6 @@ export const usePasswordReset = () => {
   const onSubmit = (data: PasswordResetFormValues) => {
     const isValid = validate(data);
     if (isValid) {
-      console.log('data', data);
       notification?.getSuccess(t('recoveryEmailSent'));
       navigate('/SignIn');
     }

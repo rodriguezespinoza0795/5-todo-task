@@ -1,13 +1,11 @@
-import { Button, Box, TextField } from '@mui/material';
+import { Button, Box, TextField, Autocomplete } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import { has } from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { BasicModalProps, TaskFormValues } from './TodoTask.types';
+import { BasicModalProps, TaskFormValues, Category } from './TodoTask.types';
 import { useNotification } from '~/context';
 import { Modal } from '~/components';
+import { DatePickerInput } from '~/components/FormFields';
 
 export default function TaskFormModal({
   open,
@@ -43,6 +41,13 @@ export default function TaskFormModal({
     resetField('dueDate');
   });
 
+  const categories: Category[] = [
+    { value: 1, label: 'Work', color: '#512D12' },
+    { value: 2, label: 'School', color: '#54754B' },
+    { value: 3, label: 'Leisure', color: '#8251AB' },
+    { value: 4, label: 'Other', color: '#7C7B82' },
+  ];
+
   return (
     <Modal
       open={open}
@@ -56,7 +61,7 @@ export default function TaskFormModal({
         type='text'
         fullWidth
         label={t('task')}
-        sx={{ mt: 2, mb: 1.5 }}
+        sx={{ my: 1.5 }}
         {...register('task', {
           required: { value: true, message: t('requiredTask') },
           minLength: {
@@ -67,31 +72,36 @@ export default function TaskFormModal({
         error={has(errors, 'task')}
         helperText={errors?.task?.message}
       />
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <Controller
-          name={'dueDate'}
-          control={control}
-          rules={{
-            required: { value: true, message: t('requiredDueDate') },
-          }}
-          render={({ field: { onChange, value } }) => (
-            <DatePicker
-              sx={{ width: '100%' }}
-              disablePast
-              label={t('dueDate')}
-              onChange={onChange}
-              value={value}
-              slotProps={{
-                textField: {
-                  helperText: errors?.dueDate?.message,
-                  error: has(errors, 'dueDate'),
-                  label: t('dueDate'),
-                },
-              }}
-            />
-          )}
-        />
-      </LocalizationProvider>
+      <DatePickerInput control={control} errors={errors} />
+      <Controller
+        control={control}
+        name={'category'}
+        rules={{
+          required: {
+            value: true,
+            message: t('requiredCategory'),
+          },
+          validate: ({ value }) => value !== 0 || (t('requiredCategory') as string),
+        }}
+        render={({ field: { onChange, value } }) => (
+          <Autocomplete
+            sx={{ width: '100%', my: 1.5 }}
+            onChange={(event, item) => {
+              onChange(item);
+            }}
+            value={value}
+            options={categories}
+            renderInput={(params: any) => (
+              <TextField
+                {...params}
+                label={t('category')}
+                error={has(errors, 'category')}
+                helperText={errors?.category?.message}
+              />
+            )}
+          />
+        )}
+      />
       <Box sx={{ display: 'flex', width: '100%', gap: '20px' }}>
         <Button fullWidth variant='outlined' sx={{ mt: 1.5 }} onClick={handleClose} color='error'>
           {t('cancel')}

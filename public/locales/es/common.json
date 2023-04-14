@@ -47,5 +47,7 @@
   "recoveryEmailSent":"Se envió el correo de recuperación",
   "invalidEmail":"Correo inválido",
   "emailRegistered":"El correo ya ha sido registrado",
-  "usernameRegistered":"El nombre de usuario ya ha sido registrado"
+  "usernameRegistered":"El nombre de usuario ya ha sido registrado",
+  "category":"Categoría",
+  "requiredCategory":"La categoría es requerida"
 }

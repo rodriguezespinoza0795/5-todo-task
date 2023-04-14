@@ -11,7 +11,6 @@ export const useSignUp = () => {
   const onSubmit = (data: SignUpFormValues) => {
     const isValid = validate(data);
     if (isValid) {
-      console.log('data', data);
       navigate('/signIn');
     }
   };
