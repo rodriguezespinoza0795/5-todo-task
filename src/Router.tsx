@@ -1,14 +1,15 @@
 import { Route, Routes } from 'react-router-dom';
-import { TodoTask, SignIn, SignUp, PasswordReset } from './pages';
-import { getItem } from '~/utils';
-
+import { TodoTask, SignIn, SignUp, PasswordReset, Admin } from './pages';
+import { useAuth } from '~/context';
 export const AppRouter = () => {
-  const registered = getItem('JWTtoken');
+  const auth = useAuth();
   return (
     <Routes>
-      {registered ? (
+      {auth?.isLogged ? (
         <>
           <Route path='/' element={<TodoTask />} />
+          <Route path='/Admin' element={<Admin />} />
+          <Route path='/Admin/:id' element={<Admin />} />
           <Route path='*' element={<TodoTask />} />
         </>
       ) : (

@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { getItem, removeItem } from '~/utils';
+import { removeItem } from '~/utils';
+import { useAuth } from '~/context';
 
 export const useDrawerAppbar = () => {
   const navigate = useNavigate();
-  const registered = getItem('JWTtoken');
+  const auth = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const { i18n } = useTranslation('common');
-  const [auth, setAuth] = useState(registered);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleDrawerToggle = () => {
@@ -31,9 +31,8 @@ export const useDrawerAppbar = () => {
 
   const logOut = () => {
     handleClose();
-    setAuth(false);
+    auth?.logout();
     removeItem('JWTtoken');
-    location.reload();
     navigate('/signIn');
   };
 

@@ -1,11 +1,13 @@
 import { Menu, MenuItem, IconButton } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { useDrawerAppbar } from './useDrawerAppBar';
 
 const MenuProfile = () => {
   const { handleMenu, anchorEl, handleClose, logOut } = useDrawerAppbar();
   const { t } = useTranslation('common');
+  const navigate = useNavigate();
   return (
     <div>
       <IconButton
@@ -34,6 +36,7 @@ const MenuProfile = () => {
         onClose={handleClose}
       >
         <MenuItem onClick={logOut}>{t('logOut')}</MenuItem>
+        <MenuItem onClick={() => navigate('/admin')}>{t('admin')}</MenuItem>
       </Menu>
     </div>
   );

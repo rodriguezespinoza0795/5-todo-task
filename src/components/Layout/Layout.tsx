@@ -1,16 +1,16 @@
 import { Container, Grid } from '@mui/material';
+import type { Breakpoint } from '@mui/material';
 import { DrawerAppBar } from '~/components';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children, width = 'sm' }: { children: React.ReactNode; width?: Breakpoint }) => {
   return (
-    <Container maxWidth='sm' sx={{ p: 0 }}>
+    <Container maxWidth={width} sx={{ p: 0 }}>
       <Grid
         container
         direction='column'
         alignItems='center'
         sx={{
           minHeight: '100vh',
-          maxWidth: '600px',
           justifyContent: { sm: 'center' },
           paddingTop: { xs: '2rem' },
         }}

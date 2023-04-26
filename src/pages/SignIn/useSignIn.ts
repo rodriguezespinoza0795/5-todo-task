@@ -2,18 +2,19 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { SignInFormValues } from './SignIn.types';
 import { getItem, setItem } from '~/utils';
-import { useNotification } from '~/context';
+import { useNotification, useAuth } from '~/context';
 
 export const useSignIn = () => {
   const navigate = useNavigate();
   const notification = useNotification();
+  const auth = useAuth();
   const { t } = useTranslation('common');
 
   const onSubmit = (data: SignInFormValues) => {
     const isValid = validate(data);
     if (isValid) {
       setItem('JWTtoken', data);
-      window.location.reload();
+      auth?.login();
       navigate('/');
     }
   };

@@ -49,5 +49,6 @@
   "emailRegistered":"El correo ya ha sido registrado",
   "usernameRegistered":"El nombre de usuario ya ha sido registrado",
   "category":"Categoría",
-  "requiredCategory":"La categoría es requerida"
+  "requiredCategory":"La categoría es requerida",
+  "admin":"Administrador"
 }

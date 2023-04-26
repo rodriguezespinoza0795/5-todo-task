@@ -49,5 +49,6 @@
   "emailRegistered":"Email has already been registered",
   "usernameRegistered":"Username has already been registered",
   "category":"Category",
-  "requiredCategory":"Category is required"
+  "requiredCategory":"Category is required",
+  "admin":"Admin"
 }
